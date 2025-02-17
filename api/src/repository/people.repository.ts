@@ -26,6 +26,12 @@ export class PeopleRepository {
       upsertType: 'on-conflict-do-update',
     });
 
-    return newPerson.raw;
+    return newPerson.raw as PeopleEntity;
+  }
+
+  async deleteOne(id: number): Promise<PeopleEntity> {
+    const deleted = await this.peopleRepository.delete({ id });
+
+    return deleted.raw as PeopleEntity;
   }
 }

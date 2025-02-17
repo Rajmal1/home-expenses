@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PeopleRepository } from 'src/repository/people.repository';
 import { PeopleService } from './people.service';
+import { RepositoryModule } from 'src/repository/repository.module';
+import { ExpensesService } from './expenses.service';
 
 @Module({
-  imports: [PeopleRepository],
-  providers: [PeopleRepository],
-  exports: [PeopleService],
+  imports: [RepositoryModule],
+  providers: [RepositoryModule],
+  exports: [PeopleService, ExpensesService],
 })
 export class ServicesModule {}

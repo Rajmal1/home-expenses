@@ -12,11 +12,14 @@ export class PeopleRepository {
   ) {}
 
   async findAll(): Promise<PeopleEntity[]> {
-    return this.peopleRepository.find();
+    return this.peopleRepository.find({ relations: ['expenses'] });
   }
 
-  async findOne(id: number): Promise<PeopleEntity> {
-    return this.findOne(id);
+  async findOne(id: number): Promise<PeopleEntity | null> {
+    return this.peopleRepository.findOne({
+      relations: ['expenses'],
+      where: { id },
+    });
   }
 
   async insertOrUpdateOne(person: Person): Promise<PeopleEntity> {
